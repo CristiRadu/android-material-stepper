@@ -16,23 +16,22 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
-import android.support.annotation.CallSuper;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
 import android.util.SparseArray;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.adapter.StepAdapter;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-
 /**
  * A base stepper type all stepper types must extend.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class AbstractStepperType {
 
     /**
@@ -65,15 +64,17 @@ public abstract class AbstractStepperType {
 
     /**
      * Called when a step gets selected as the new current step.
-     * @param newStepPosition new current step position
+     *
+     * @param newStepPosition     new current step position
      * @param userTriggeredChange <code>true</code> if current step position changed as a direct result of user interaction
      */
     public abstract void onStepSelected(int newStepPosition, boolean userTriggeredChange);
 
     /**
      * Called to set whether the stepPosition has an error or not, changing it's appearance.
+     *
      * @param stepPosition the step to set the error
-     * @param error error instance or null if no error
+     * @param error        error instance or null if no error
      */
     public void setError(int stepPosition, @Nullable VerificationError error) {
         mStepErrors.put(stepPosition, error);
@@ -92,6 +93,7 @@ public abstract class AbstractStepperType {
 
     /**
      * Called when {@link StepperLayout}'s adapter gets changed
+     *
      * @param stepAdapter new stepper adapter
      */
     @CallSuper

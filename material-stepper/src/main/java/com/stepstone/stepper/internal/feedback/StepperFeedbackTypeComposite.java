@@ -16,19 +16,17 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * A stepper feedback type which is a composition of other feedback type, which allows to select only a group of feedback types.
  * See Stepper feedback section in https://material.io/guidelines/components/steppers.html#steppers-types-of-steppers
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class StepperFeedbackTypeComposite implements StepperFeedbackType {
 
     @NonNull
@@ -50,6 +48,7 @@ public class StepperFeedbackTypeComposite implements StepperFeedbackType {
 
     /**
      * Adds a child component to this composite.
+     *
      * @param component child to add
      */
     public void addComponent(@NonNull StepperFeedbackType component) {

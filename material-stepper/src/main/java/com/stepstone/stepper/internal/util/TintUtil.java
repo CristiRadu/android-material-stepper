@@ -21,27 +21,27 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.widget.TextView;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 /**
  * Utility class for tinting drawables/widgets.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class TintUtil {
 
     private static final String TAG = TintUtil.class.getSimpleName();
 
     /**
      * Tints TextView's text color and it's compound drawables
-     * @param textview text view to tint
+     *
+     * @param textview  text view to tint
      * @param tintColor color state list to use for tinting
      */
     public static void tintTextView(@NonNull TextView textview, ColorStateList tintColor) {
@@ -65,8 +65,9 @@ public class TintUtil {
 
     /**
      * Tints a drawable with the provided color
+     *
      * @param drawable drawable to tint
-     * @param color tint color
+     * @param color    tint color
      * @return tinted drawable
      */
     public static Drawable tintDrawable(@Nullable Drawable drawable, @ColorInt int color) {
@@ -78,8 +79,9 @@ public class TintUtil {
 
     /**
      * Tints a drawable with the provided color state list
+     *
      * @param drawable drawable to tint
-     * @param color tint color state list
+     * @param color    tint color state list
      * @return tinted drawable
      */
     public static Drawable tintDrawable(@Nullable Drawable drawable, ColorStateList color) {

@@ -2,8 +2,8 @@ package com.stepstone.stepper.sample
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.support.annotation.ColorInt
 import android.view.View
+import androidx.annotation.ColorInt
 import butterknife.BindColor
 
 /**

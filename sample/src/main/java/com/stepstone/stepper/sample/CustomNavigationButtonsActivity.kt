@@ -17,9 +17,9 @@ limitations under the License.
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
@@ -28,7 +28,8 @@ import com.stepstone.stepper.sample.adapter.CustomButtonsSampleFragmentStepAdapt
 import butterknife.BindView
 import butterknife.ButterKnife
 
-class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.StepperListener, OnProceedListener {
+class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.StepperListener,
+    OnProceedListener {
 
     companion object {
 
@@ -49,7 +50,11 @@ class CustomNavigationButtonsActivity : AppCompatActivity(), StepperLayout.Stepp
         setContentView(R.layout.activity_custom_navigation_buttons)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        stepperLayout.setAdapter(CustomButtonsSampleFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(
+            CustomButtonsSampleFragmentStepAdapter(
+                supportFragmentManager, lifecycle, this
+            ), startingStepPosition
+        )
         stepperLayout.setListener(this)
     }
 

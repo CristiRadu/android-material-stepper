@@ -18,13 +18,11 @@ package com.stepstone.stepper.sample.step.fragment
 
 import android.content.Context
 import android.widget.TextView
-
+import butterknife.BindView
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.VerificationError
 import com.stepstone.stepper.sample.DataManager
 import com.stepstone.stepper.sample.R
-
-import butterknife.BindView
 
 internal class PassDataBetweenStepsSecondStepFragment : ButterKnifeFragment(), Step {
 
@@ -40,7 +38,7 @@ internal class PassDataBetweenStepsSecondStepFragment : ButterKnifeFragment(), S
 
     lateinit var dataManager: DataManager
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is DataManager) {
             dataManager = context

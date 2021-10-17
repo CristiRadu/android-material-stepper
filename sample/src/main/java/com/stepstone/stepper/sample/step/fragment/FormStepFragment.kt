@@ -42,7 +42,7 @@ internal class FormStepFragment : ButterKnifeFragment(), Step {
 
     private var onProceedListener: OnProceedListener? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnProceedListener) {
             onProceedListener = context

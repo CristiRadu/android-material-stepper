@@ -17,7 +17,7 @@ limitations under the License.
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 
@@ -45,7 +45,7 @@ class ProceedProgrammaticallyActivity : AppCompatActivity(), StepperLayout.Stepp
         setContentView(R.layout.activity_default_dots)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        stepperLayout.setAdapter(FormFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(FormFragmentStepAdapter(supportFragmentManager, lifecycle, this), startingStepPosition)
         stepperLayout.setListener(this)
     }
 

@@ -2,15 +2,15 @@ package com.stepstone.stepper.internal.widget
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.support.v7.view.ContextThemeWrapper
-import com.nhaarman.mockito_kotlin.whenever
+import androidx.appcompat.view.ContextThemeWrapper
 import com.stepstone.stepper.R
 import com.stepstone.stepper.VerificationError
-import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
+import test.runner.StepperRobolectricTestRunner
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
@@ -27,15 +27,17 @@ class StepTabTest {
         val ERROR_MESSAGE = "Oooops"
     }
 
-    @Mock
-    lateinit var mockVerificationError: VerificationError
+    private val mockVerificationError: VerificationError = mock()
 
     lateinit var tab: StepTab
 
     @SuppressLint("RestrictedApi")
     @Before
     fun setUp() {
-        val contextThemeWrapper = ContextThemeWrapper(RuntimeEnvironment.application, RuntimeEnvironment.application.theme)
+        val contextThemeWrapper = ContextThemeWrapper(
+            RuntimeEnvironment.application,
+            RuntimeEnvironment.application.theme
+        )
         contextThemeWrapper.setTheme(R.style.MSDefaultStepperLayoutTheme)
         tab = StepTab(contextThemeWrapper)
     }
@@ -43,9 +45,9 @@ class StepTabTest {
     @Test
     fun `Should create a default tab in inactive state`() {
         assertTab()
-                .isNotNull
-                .isInState(StepTab.InactiveNumberState::class.java)
-                .isSubtitleHidden()
+            .isNotNull
+            .isInState(StepTab.InactiveNumberState::class.java)
+            .isSubtitleHidden()
     }
 
     @Test
@@ -55,7 +57,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .hasTitle(TITLE)
+            .hasTitle(TITLE)
     }
 
     @Config(sdk = intArrayOf(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.LOLLIPOP))
@@ -66,7 +68,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .hasSubtitle(SUBTITLE)
+            .hasSubtitle(SUBTITLE)
     }
 
     @Config(sdk = intArrayOf(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.LOLLIPOP))
@@ -80,7 +82,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .hasSubtitle(SUBTITLE)
+            .hasSubtitle(SUBTITLE)
     }
 
     @Config(sdk = intArrayOf(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.LOLLIPOP))
@@ -94,7 +96,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .isSubtitleHidden()
+            .isSubtitleHidden()
     }
 
     @Config(sdk = intArrayOf(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.LOLLIPOP))
@@ -108,7 +110,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .isSubtitleHidden()
+            .isSubtitleHidden()
     }
 
     @Config(sdk = intArrayOf(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.LOLLIPOP))
@@ -122,7 +124,7 @@ class StepTabTest {
 
         //then
         assertTab()
-                .hasSubtitle(NEW_SUBTITLE)
+            .hasSubtitle(NEW_SUBTITLE)
     }
 
     @Test
@@ -133,7 +135,7 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.WarningState::class.java)
+            .isInState(StepTab.WarningState::class.java)
     }
 
     @Test
@@ -147,8 +149,8 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.WarningState::class.java)
-                .hasSubtitle(SUBTITLE)
+            .isInState(StepTab.WarningState::class.java)
+            .hasSubtitle(SUBTITLE)
     }
 
     @Test
@@ -159,8 +161,8 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.WarningState::class.java)
-                .isSubtitleHidden()
+            .isInState(StepTab.WarningState::class.java)
+            .isSubtitleHidden()
     }
 
     @Test
@@ -175,8 +177,8 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.WarningState::class.java)
-                .hasSubtitle(ERROR_MESSAGE)
+            .isInState(StepTab.WarningState::class.java)
+            .hasSubtitle(ERROR_MESSAGE)
     }
 
     @Test
@@ -190,8 +192,8 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.WarningState::class.java)
-                .hasSubtitle(ERROR_MESSAGE)
+            .isInState(StepTab.WarningState::class.java)
+            .hasSubtitle(ERROR_MESSAGE)
     }
 
     @Test
@@ -202,7 +204,7 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.DoneState::class.java)
+            .isInState(StepTab.DoneState::class.java)
     }
 
     @Test
@@ -213,7 +215,7 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.ActiveNumberState::class.java)
+            .isInState(StepTab.ActiveNumberState::class.java)
     }
 
     @Test
@@ -224,7 +226,7 @@ class StepTabTest {
         //then
 
         assertTab()
-                .isInState(StepTab.InactiveNumberState::class.java)
+            .isInState(StepTab.InactiveNumberState::class.java)
     }
 
     private fun assertTab() = StepTabAssert.assertThat(tab)

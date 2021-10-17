@@ -16,21 +16,20 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.widget.DottedProgressBar;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-
 /**
  * Stepper type which displays mobile step dots.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class DotsStepperType extends AbstractStepperType {
 
     private static final int EDIT_MODE_DOT_COUNT = 3;
@@ -39,7 +38,7 @@ public class DotsStepperType extends AbstractStepperType {
 
     public DotsStepperType(StepperLayout stepperLayout) {
         super(stepperLayout);
-        mDottedProgressBar = (DottedProgressBar) stepperLayout.findViewById(R.id.ms_stepDottedProgressBar);
+        mDottedProgressBar = stepperLayout.findViewById(R.id.ms_stepDottedProgressBar);
 
         mDottedProgressBar.setSelectedColor(getSelectedColor());
         mDottedProgressBar.setUnselectedColor(getUnselectedColor());

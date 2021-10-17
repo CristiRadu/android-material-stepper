@@ -6,5 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:ms_showBackButtonOnFirstStep="true"
+    app:ms_stepperFeedbackType="content_fade"
     app:ms_stepperType="dots"
     tools:theme="@style/AppTheme" />

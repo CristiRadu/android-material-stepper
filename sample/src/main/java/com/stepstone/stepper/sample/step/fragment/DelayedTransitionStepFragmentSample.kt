@@ -17,10 +17,10 @@ limitations under the License.
 package com.stepstone.stepper.sample.step.fragment
 
 import android.os.Handler
-import android.support.annotation.UiThread
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.SwitchCompat
 import android.widget.Toast
+import androidx.annotation.UiThread
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SwitchCompat
 import butterknife.BindView
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
@@ -59,7 +59,7 @@ internal class DelayedTransitionStepFragmentSample : ButterKnifeFragment(), Bloc
 
     @UiThread
     override fun onNextClicked(callback: StepperLayout.OnNextClickedCallback) {
-        val builder = AlertDialog.Builder(activity!!)
+        val builder = AlertDialog.Builder(requireActivity())
         builder.setView(R.layout.dialog_loader)
         builder.setCancelable(false)
         dialog = builder.show()
@@ -95,7 +95,11 @@ internal class DelayedTransitionStepFragmentSample : ButterKnifeFragment(), Bloc
 
     @UiThread
     override fun onBackClicked(callback: StepperLayout.OnBackClickedCallback) {
-        Toast.makeText(this.context, "Your custom back action. Here you should cancel currently running operations", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this.context,
+            "Your custom back action. Here you should cancel currently running operations",
+            Toast.LENGTH_SHORT
+        ).show()
         callback.goToPrevStep()
     }
 }

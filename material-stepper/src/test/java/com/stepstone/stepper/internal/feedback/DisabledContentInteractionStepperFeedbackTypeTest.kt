@@ -1,11 +1,11 @@
 package com.stepstone.stepper.internal.feedback
 
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import androidx.viewpager2.widget.ViewPager2
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import com.stepstone.stepper.R
 import com.stepstone.stepper.StepperLayout
-import com.stepstone.stepper.internal.widget.StepViewPager
 import org.junit.Test
 
 /**
@@ -17,10 +17,10 @@ class DisabledContentInteractionStepperFeedbackTypeTest {
         val PROGRESS_MESSAGE = "loading..."
     }
 
-    val mockStepPager: StepViewPager = mock { }
+    val mockStepPager: ViewPager2 = mock()
 
     val mockStepperLayout: StepperLayout = mock {
-        on { findViewById<StepViewPager>(R.id.ms_stepPager) } doReturn mockStepPager
+        on { findViewById<ViewPager2>(R.id.ms_stepPager) } doReturn mockStepPager
     }
 
     val feedbackType: DisabledContentInteractionStepperFeedbackType = DisabledContentInteractionStepperFeedbackType(mockStepperLayout)
@@ -31,7 +31,7 @@ class DisabledContentInteractionStepperFeedbackTypeTest {
         feedbackType.showProgress(PROGRESS_MESSAGE)
 
         //then
-        verify(mockStepPager).setBlockTouchEventsFromChildrenEnabled(true)
+        verify(mockStepPager).setUserInputEnabled(false)
     }
 
     @Test
@@ -40,6 +40,6 @@ class DisabledContentInteractionStepperFeedbackTypeTest {
         feedbackType.hideProgress()
 
         //then
-        verify(mockStepPager).setBlockTouchEventsFromChildrenEnabled(false)
+        verify(mockStepPager).setUserInputEnabled(true)
     }
 }

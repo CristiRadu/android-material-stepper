@@ -21,29 +21,29 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.annotation.UiThread;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.annotation.UiThread;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.stepstone.stepper.adapter.StepAdapter;
 import com.stepstone.stepper.internal.feedback.StepperFeedbackType;
@@ -56,6 +56,7 @@ import com.stepstone.stepper.internal.widget.ColorableProgressBar;
 import com.stepstone.stepper.internal.widget.DottedProgressBar;
 import com.stepstone.stepper.internal.widget.RightNavigationButton;
 import com.stepstone.stepper.internal.widget.TabsContainer;
+import com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
 /**
@@ -193,7 +194,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         }
     }
 
-    private ViewPager mPager;
+    private ViewPager2 mPager;
 
     private Button mBackNavigationButton;
 
@@ -298,7 +299,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     @Override
-    public final void setOrientation(@LinearLayoutCompat.OrientationMode int orientation) {
+    public final void setOrientation(int orientation) {
         //only vertical orientation is supported
         super.setOrientation(VERTICAL);
     }
@@ -351,15 +352,14 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     /**
-     * Overrides the default page transformer used in the underlying {@link com.stepstone.stepper.internal.widget.StepViewPager}.
-     * If you're supporting RTL make sure your {@link android.support.v4.view.ViewPager.PageTransformer} accounts for it.
+     * Overrides the default page transformer
+     * If you're supporting RTL make sure your {@link ViewPager.PageTransformer} accounts for it.
      *
      * @param pageTransformer new page transformer
-     * @see com.stepstone.stepper.internal.widget.StepViewPager
      * @see com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory
      */
-    public void setPageTransformer(@Nullable ViewPager.PageTransformer pageTransformer) {
-        mPager.setPageTransformer(false, pageTransformer);
+    public void setPageTransformer(@Nullable ViewPager2.PageTransformer pageTransformer) {
+        mPager.setPageTransformer(pageTransformer);
     }
 
     public int getSelectedColor() {
@@ -733,7 +733,6 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
         return mContentOverlayBackground;
     }
 
-    @SuppressWarnings("RestrictedApi")
     private void init(AttributeSet attrs, @AttrRes int defStyleAttr) {
         initDefaultValues();
         extractValuesFromAttributes(attrs, defStyleAttr);
@@ -749,13 +748,7 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
 
         bindViews();
 
-        mPager.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
+        mPager.setOnTouchListener((view, motionEvent) -> true);
 
         initNavigation();
 
@@ -816,19 +809,21 @@ public class StepperLayout extends LinearLayout implements TabsContainer.TabItem
     }
 
     private void bindViews() {
-        mPager = (ViewPager) findViewById(R.id.ms_stepPager);
+        mPager = findViewById(R.id.ms_stepPager);
+        mPager.setUserInputEnabled(false);
+        mPager.setPageTransformer(StepPageTransformerFactory.createPageTransformer(getResources()));
 
-        mBackNavigationButton = (Button) findViewById(R.id.ms_stepPrevButton);
-        mNextNavigationButton = (RightNavigationButton) findViewById(R.id.ms_stepNextButton);
-        mCompleteNavigationButton = (RightNavigationButton) findViewById(R.id.ms_stepCompleteButton);
+        mBackNavigationButton = findViewById(R.id.ms_stepPrevButton);
+        mNextNavigationButton = findViewById(R.id.ms_stepNextButton);
+        mCompleteNavigationButton = findViewById(R.id.ms_stepCompleteButton);
 
-        mStepNavigation = (ViewGroup) findViewById(R.id.ms_bottomNavigation);
+        mStepNavigation = findViewById(R.id.ms_bottomNavigation);
 
-        mDottedProgressBar = (DottedProgressBar) findViewById(R.id.ms_stepDottedProgressBar);
+        mDottedProgressBar = findViewById(R.id.ms_stepDottedProgressBar);
 
-        mProgressBar = (ColorableProgressBar) findViewById(R.id.ms_stepProgressBar);
+        mProgressBar = findViewById(R.id.ms_stepProgressBar);
 
-        mTabsContainer = (TabsContainer) findViewById(R.id.ms_stepTabsContainer);
+        mTabsContainer = findViewById(R.id.ms_stepTabsContainer);
     }
 
     private void extractValuesFromAttributes(AttributeSet attrs, @AttrRes int defStyleAttr) {

@@ -16,17 +16,15 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.stepstone.stepper.StepperLayout;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * Feedback stepper type which disables the buttons in the bottom navigation when an operation is in progress.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class DisabledBottomNavigationStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull

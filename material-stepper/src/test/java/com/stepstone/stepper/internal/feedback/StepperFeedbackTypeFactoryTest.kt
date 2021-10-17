@@ -3,13 +3,13 @@ package com.stepstone.stepper.internal.feedback
 import android.content.res.Resources
 import android.view.View
 import android.widget.TextView
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import com.stepstone.stepper.R
 import com.stepstone.stepper.StepperLayout
-import com.stepstone.stepper.test.assertion.StepperFeedbackTypeCompositeAssert.Companion.assertThat
+import test.assertion.StepperFeedbackTypeCompositeAssert.Companion.assertThat
+import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
@@ -170,7 +170,7 @@ class StepperFeedbackTypeFactoryTest {
 
     private fun assertCreatedTypeIsComposite(createdType: StepperFeedbackType) {
         assertNotNull(createdType)
-        MatcherAssert.assertThat(createdType, Matchers.instanceOf(StepperFeedbackTypeComposite::class.java))
+        MatcherAssert.assertThat(createdType, instanceOf(StepperFeedbackTypeComposite::class.java))
     }
 
 }

@@ -16,26 +16,24 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.internal.widget.StepViewPager;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * Feedback stepper type which intercepts touch events on the steps' content and ignores them.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class DisabledContentInteractionStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull
-    private final StepViewPager mStepPager;
+    private final ViewPager2 mStepPager;
 
     public DisabledContentInteractionStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
-        mStepPager = (StepViewPager) stepperLayout.findViewById(R.id.ms_stepPager);
+        mStepPager = stepperLayout.findViewById(R.id.ms_stepPager);
     }
 
     @Override
@@ -49,7 +47,7 @@ public class DisabledContentInteractionStepperFeedbackType implements StepperFee
     }
 
     private void setContentInteractionEnabled(boolean enabled) {
-        mStepPager.setBlockTouchEventsFromChildrenEnabled(!enabled);
+        mStepPager.setUserInputEnabled(enabled);
     }
 
 }

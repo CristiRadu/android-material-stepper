@@ -17,7 +17,7 @@ limitations under the License.
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
@@ -47,7 +47,7 @@ class StepperFeedbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_stepper_feedback)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        stepperLayout.setAdapter(StepperFeedbackFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(StepperFeedbackFragmentStepAdapter(supportFragmentManager, lifecycle, this), startingStepPosition)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

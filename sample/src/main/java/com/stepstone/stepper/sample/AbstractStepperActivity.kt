@@ -17,19 +17,18 @@ limitations under the License.
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import butterknife.BindView
-
+import butterknife.ButterKnife
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
 import com.stepstone.stepper.sample.adapter.SampleFragmentStepAdapter
 
-import butterknife.ButterKnife
-
-abstract class AbstractStepperActivity : AppCompatActivity(), StepperLayout.StepperListener, OnNavigationBarListener {
+abstract class AbstractStepperActivity : AppCompatActivity(), StepperLayout.StepperListener,
+    OnNavigationBarListener {
 
     companion object {
         private const val CURRENT_STEP_POSITION_KEY = "position"
@@ -49,7 +48,10 @@ abstract class AbstractStepperActivity : AppCompatActivity(), StepperLayout.Step
 
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        stepperLayout.setAdapter(SampleFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(
+            SampleFragmentStepAdapter(supportFragmentManager, lifecycle, this),
+            startingStepPosition
+        )
 
         stepperLayout.setListener(this)
     }
@@ -73,7 +75,8 @@ abstract class AbstractStepperActivity : AppCompatActivity(), StepperLayout.Step
     }
 
     override fun onError(verificationError: VerificationError) {
-        Toast.makeText(this, "onError! -> " + verificationError.errorMessage, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "onError! -> " + verificationError.errorMessage, Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onStepSelected(newStepPosition: Int) {

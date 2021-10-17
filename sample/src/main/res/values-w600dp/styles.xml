@@ -9,7 +9,7 @@
     </style>
 
     <style name="MainToolbarStyle">
-        <item name="layout_collapseMode">parallax</item>
+<!--        <item name="layout_collapseMode">parallax</item>-->
     </style>
 
     <style name="MainListStyle">

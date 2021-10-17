@@ -17,11 +17,6 @@ limitations under the License.
 package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.UiThread;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -30,6 +25,12 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.UiThread;
+import androidx.core.content.ContextCompat;
+
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
@@ -37,14 +38,11 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.List;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-
 /**
  * Layout used for displaying tabs from the horizontal stepper.
  * Steps must be added via {@link #setSteps(List)}.<br>
  * <b>NOTE:</b> {@link #setSelectedColor(int)} and {@link #setUnselectedColor(int)} should be set before calling {@link #setSteps(List)}.
  */
-@RestrictTo(LIBRARY)
 public class TabsContainer extends FrameLayout {
 
     /**
@@ -60,10 +58,7 @@ public class TabsContainer extends FrameLayout {
         @UiThread
         void onTabClicked(int position);
 
-        TabItemListener NULL = new TabItemListener() {
-            @Override
-            public void onTabClicked(int position) {
-            }
+        TabItemListener NULL = position -> {
         };
     }
 
@@ -146,8 +141,9 @@ public class TabsContainer extends FrameLayout {
 
     /**
      * Changes the position of the current step and updates the UI based on it.
-     * @param currentStepPosition new current step
-     * @param stepErrors map containing error state for step positions
+     *
+     * @param currentStepPosition     new current step
+     * @param stepErrors              map containing error state for step positions
      * @param showErrorMessageEnabled true if an error message below step title should appear when an error occurs
      */
     public void updateSteps(int currentStepPosition, SparseArray<VerificationError> stepErrors, boolean showErrorMessageEnabled) {

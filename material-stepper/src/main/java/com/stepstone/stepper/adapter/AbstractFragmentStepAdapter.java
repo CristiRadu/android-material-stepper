@@ -17,14 +17,14 @@ limitations under the License.
 package com.stepstone.stepper.adapter;
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 
-import com.stepstone.stepper.R;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
@@ -32,7 +32,7 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
  * A base adapter class which returns step fragments to use inside of the {@link com.stepstone.stepper.StepperLayout}.
  */
 public abstract class AbstractFragmentStepAdapter
-        extends FragmentPagerAdapter
+        extends FragmentStateAdapter
         implements StepAdapter {
 
     @NonNull
@@ -41,34 +41,50 @@ public abstract class AbstractFragmentStepAdapter
     @NonNull
     protected final Context context;
 
-    public AbstractFragmentStepAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
-        super(fm);
+    public AbstractFragmentStepAdapter(
+            @NonNull FragmentManager fm,
+            @NonNull Lifecycle lifecycle,
+            @NonNull Context context
+    ) {
+        super(fm, lifecycle);
         this.mFragmentManager = fm;
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public final Fragment getItem(@IntRange(from = 0) int position) {
+    public Fragment createFragment(int position) {
         return (Fragment) createStep(position);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     public Step findStep(@IntRange(from = 0) int position) {
-        String fragmentTag =  "android:switcher:" + R.id.ms_stepPager + ":" + this.getItemId(position);
+        String fragmentTag = "f" + this.getItemId(position);
         return (Step) mFragmentManager.findFragmentByTag(fragmentTag);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
         return new StepViewModel.Builder(context).create();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final PagerAdapter getPagerAdapter() {
+    public final FragmentStateAdapter getPagerAdapter() {
         return this;
+    }
+
+    @Override
+    public int getItemCount() {
+        return getCount();
     }
 }

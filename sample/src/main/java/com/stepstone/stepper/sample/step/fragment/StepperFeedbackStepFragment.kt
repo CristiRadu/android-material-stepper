@@ -19,16 +19,14 @@ package com.stepstone.stepper.sample.step.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.UiThread
 import android.view.View
 import android.widget.TextView
-
+import androidx.annotation.UiThread
+import butterknife.BindView
 import com.stepstone.stepper.BlockingStep
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.VerificationError
 import com.stepstone.stepper.sample.R
-
-import butterknife.BindView
 
 internal class StepperFeedbackStepFragment : ButterKnifeFragment(), BlockingStep {
 
@@ -51,7 +49,8 @@ internal class StepperFeedbackStepFragment : ButterKnifeFragment(), BlockingStep
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        stepContent.text = "Step content #${arguments!!.getInt(STEP_POSITION)} \n ${getString(R.string.lorem_ipsum)}"
+        stepContent.text =
+            "Step content #${requireArguments().getInt(STEP_POSITION)} \n ${getString(R.string.lorem_ipsum)}"
     }
 
     override fun verifyStep(): VerificationError? {

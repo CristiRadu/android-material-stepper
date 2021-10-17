@@ -1,18 +1,16 @@
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-
-import com.stepstone.stepper.StepperLayout
-import com.stepstone.stepper.VerificationError
-import com.stepstone.stepper.sample.adapter.SampleStepAdapter
-
+import androidx.appcompat.app.AppCompatActivity
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.stepstone.stepper.StepperLayout
+import com.stepstone.stepper.VerificationError
 
-class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, OnNavigationBarListener {
+class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener,
+    OnNavigationBarListener {
 
     companion object {
 
@@ -26,10 +24,10 @@ class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_no_frag)
         ButterKnife.bind(this)
-        val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        val sampleStepAdapter = SampleStepAdapter(this)
-        stepperLayout.setAdapter(sampleStepAdapter, startingStepPosition)
-        stepperLayout.setListener(this)
+//        val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
+//        val sampleStepAdapter = SampleStepAdapter(this)
+//        stepperLayout.setAdapter(sampleStepAdapter, startingStepPosition)
+//        stepperLayout.setListener(this)
     }
 
     override fun onBackPressed() {
@@ -51,7 +49,8 @@ class NoFragmentsActivity : AppCompatActivity(), StepperLayout.StepperListener, 
     }
 
     override fun onError(verificationError: VerificationError) {
-        Toast.makeText(this, "onError! -> " + verificationError.errorMessage, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "onError! -> " + verificationError.errorMessage, Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onStepSelected(newStepPosition: Int) {
