@@ -16,21 +16,21 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_INVISIBLE;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
+
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_INVISIBLE;
-import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
-
 /**
  * Feedback stepper type which shows a dimmed overlay over the content.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class ContentOverlayStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull
@@ -41,7 +41,7 @@ public class ContentOverlayStepperFeedbackType implements StepperFeedbackType {
         mOverlayView.setVisibility(View.VISIBLE);
         mOverlayView.setAlpha(ALPHA_INVISIBLE);
         final int contentOverlayBackground = stepperLayout.getContentOverlayBackground();
-        if (contentOverlayBackground != 0)  {
+        if (contentOverlayBackground != 0) {
             mOverlayView.setBackgroundResource(contentOverlayBackground);
         }
     }

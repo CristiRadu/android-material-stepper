@@ -1,11 +1,11 @@
 package com.stepstone.stepper.internal.util;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * This class consists of {@code static} utility methods for operating
  * on objects.
- *
+ * <p>
  * This backports {@link java.util.Objects} which is available since API 19.
  *
  * @author Piotr Zawadzki

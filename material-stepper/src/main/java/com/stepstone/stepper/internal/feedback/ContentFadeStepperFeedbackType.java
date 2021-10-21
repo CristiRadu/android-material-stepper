@@ -16,31 +16,33 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
-import android.view.View;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
+import com.stepstone.stepper.internal.widget.pagetransformer.StepPageTransformerFactory;
 
 /**
  * Feedback stepper type which partially fades the content out.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class ContentFadeStepperFeedbackType implements StepperFeedbackType {
 
     @NonNull
-    private final View mPager;
+    private final ViewPager2 mPager;
 
     @FloatRange(from = 0.0f, to = 1.0f)
     private final float mFadeOutAlpha;
 
     public ContentFadeStepperFeedbackType(@NonNull StepperLayout stepperLayout) {
         mPager = stepperLayout.findViewById(R.id.ms_stepPager);
+
+//        mPager.setPageTransformer(StepPageTransformerFactory.createPageTransformer(stepperLayout.getContext()));
         mFadeOutAlpha = stepperLayout.getContentFadeAlpha();
     }
 

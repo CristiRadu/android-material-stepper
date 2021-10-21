@@ -1,12 +1,14 @@
 package com.stepstone.stepper
 
+import android.os.Handler
+import android.os.Looper
 import android.widget.LinearLayout
-import com.stepstone.stepper.test.*
-import com.stepstone.stepper.test.assertion.StepperLayoutAssert
-import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
-import com.stepstone.stepper.test.test_double.SpyStepAdapter
+import test.*
+import test.assertion.StepperLayoutAssert
+import test.runner.StepperRobolectricTestRunner
+import test.test_double.SpyStepAdapter
 import com.stepstone.stepper.viewmodel.StepViewModel
-import org.junit.Assert
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -40,9 +42,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasHorizontalProgressBarHidden()
-                .hasDottedProgressBarHidden()
-                .hasTabsHidden()
+            .hasHorizontalProgressBarHidden()
+            .hasDottedProgressBarHidden()
+            .hasTabsHidden()
     }
 
     @Test
@@ -55,9 +57,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasDottedProgressBarHidden()
-                .hasHorizontalProgressBarHidden()
-                .hasTabsHidden()
+            .hasDottedProgressBarHidden()
+            .hasHorizontalProgressBarHidden()
+            .hasTabsHidden()
     }
 
     @Test
@@ -70,9 +72,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasTabsHidden()
-                .hasHorizontalProgressBarHidden()
-                .hasDottedProgressBarHidden()
+            .hasTabsHidden()
+            .hasHorizontalProgressBarHidden()
+            .hasDottedProgressBarHidden()
     }
 
     @Test
@@ -85,9 +87,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasHorizontalProgressBarHidden()
-                .hasDottedProgressBarHidden()
-                .hasTabsHidden()
+            .hasHorizontalProgressBarHidden()
+            .hasDottedProgressBarHidden()
+            .hasTabsHidden()
     }
 
     @Test
@@ -100,9 +102,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasHorizontalProgressBarHidden()
-                .hasDottedProgressBarHidden()
-                .hasTabsHidden()
+            .hasHorizontalProgressBarHidden()
+            .hasDottedProgressBarHidden()
+            .hasTabsHidden()
     }
 
     @Test
@@ -115,9 +117,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasHorizontalProgressBarShown()
-                .hasDottedProgressBarHidden()
-                .hasTabsHidden()
+            .hasHorizontalProgressBarShown()
+            .hasDottedProgressBarHidden()
+            .hasTabsHidden()
         assertFirstFragmentWasNotifiedAboutBeingSelected()
     }
 
@@ -131,9 +133,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasDottedProgressBarShown()
-                .hasHorizontalProgressBarHidden()
-                .hasTabsHidden()
+            .hasDottedProgressBarShown()
+            .hasHorizontalProgressBarHidden()
+            .hasTabsHidden()
         assertFirstFragmentWasNotifiedAboutBeingSelected()
     }
 
@@ -147,9 +149,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasTabsShown()
-                .hasHorizontalProgressBarHidden()
-                .hasDottedProgressBarHidden()
+            .hasTabsShown()
+            .hasHorizontalProgressBarHidden()
+            .hasDottedProgressBarHidden()
         assertFirstFragmentWasNotifiedAboutBeingSelected()
     }
 
@@ -157,9 +159,9 @@ class StepperLayoutTest {
     fun `Horizontal orientation should be ignored if set in View attributes`() {
         //given
         val attributeSet = Robolectric.buildAttributeSet()
-                .addAttribute(R.attr.ms_stepperType, TYPE_DOTS)
-                .addAttribute(android.R.attr.orientation, ORIENTATION_HORIZONTAL)
-                .build()
+            .addAttribute(R.attr.ms_stepperType, TYPE_DOTS)
+            .addAttribute(android.R.attr.orientation, ORIENTATION_HORIZONTAL)
+            .build()
 
         //when
         stepperLayout = createStepperLayoutInActivity(attributeSet)
@@ -209,9 +211,9 @@ class StepperLayoutTest {
     fun `Bottom navigation should be hidden if 'ms_showBottomNavigation' attribute is set to 'false' in XML`() {
         //given
         val attributeSet = Robolectric.buildAttributeSet()
-                .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
-                .addAttribute(R.attr.ms_showBottomNavigation, "false")
-                .build()
+            .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+            .addAttribute(R.attr.ms_showBottomNavigation, "false")
+            .build()
 
         //when
         stepperLayout = createStepperLayoutInActivity(attributeSet)
@@ -237,9 +239,9 @@ class StepperLayoutTest {
     fun `Bottom navigation should be shown if set programmatically`() {
         //given
         val attributeSet = Robolectric.buildAttributeSet()
-                .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
-                .addAttribute(R.attr.ms_showBottomNavigation, "false")
-                .build()
+            .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+            .addAttribute(R.attr.ms_showBottomNavigation, "false")
+            .build()
         stepperLayout = createStepperLayoutInActivity(attributeSet)
 
         //when
@@ -259,27 +261,27 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasBackButtonHidden()
-                .hasNextButtonShown()
-                .hasCompleteButtonHidden()
+            .hasBackButtonHidden()
+            .hasNextButtonShown()
+            .hasCompleteButtonHidden()
     }
 
     @Test
     fun `Should show 'Back' and 'Next' buttons on first page if specified in view attributes`() {
         //given
         val attributeSet = Robolectric.buildAttributeSet()
-                        .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
-                        .addAttribute(R.attr.ms_showBackButtonOnFirstStep, true.toString())
-                        .build()
+            .addAttribute(R.attr.ms_stepperType, TYPE_TABS)
+            .addAttribute(R.attr.ms_showBackButtonOnFirstStep, true.toString())
+            .build()
 
         //when
         stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet)
 
         //then
         assertStepperLayout()
-                .hasBackButtonShown()
-                .hasNextButtonShown()
-                .hasCompleteButtonHidden()
+            .hasBackButtonShown()
+            .hasNextButtonShown()
+            .hasCompleteButtonHidden()
     }
 
     @Test
@@ -292,10 +294,12 @@ class StepperLayoutTest {
         goToLastPage()
 
         //then
-        assertStepperLayout()
+        Handler(Looper.getMainLooper()).post {
+            assertStepperLayout()
                 .hasBackButtonShown()
                 .hasNextButtonHidden()
                 .hasCompleteButtonShown()
+        }
     }
 
     @Test
@@ -309,9 +313,9 @@ class StepperLayoutTest {
 
         //then
         assertStepperLayout()
-                .hasBackButtonShown()
-                .hasNextButtonShown()
-                .hasCompleteButtonHidden()
+            .hasBackButtonShown()
+            .hasNextButtonShown()
+            .hasCompleteButtonHidden()
     }
 
     @Test
@@ -319,17 +323,22 @@ class StepperLayoutTest {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
         val firstStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
-                .setEndButtonVisible(false)
-                .create()
+            .setEndButtonVisible(false)
+            .create()
 
         //when
-        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, firstStepViewModel, null, null)
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(
+            attributeSet,
+            firstStepViewModel,
+            null,
+            null
+        )
 
         //then
         assertStepperLayout()
-                .hasBackButtonHidden()
-                .hasNextButtonHidden()
-                .hasCompleteButtonHidden()
+            .hasBackButtonHidden()
+            .hasNextButtonHidden()
+            .hasCompleteButtonHidden()
     }
 
     @Test
@@ -337,19 +346,26 @@ class StepperLayoutTest {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
         val middleStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
-                .setEndButtonVisible(false)
-                .setBackButtonVisible(false)
-                .create()
-        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, null, middleStepViewModel, null)
+            .setEndButtonVisible(false)
+            .setBackButtonVisible(false)
+            .create()
+        stepperLayout = createStepperLayoutWithAdapterSetInActivity(
+            attributeSet,
+            null,
+            middleStepViewModel,
+            null
+        )
 
         //when
         goToMiddlePage()
 
         //then
-        assertStepperLayout()
+        Handler(Looper.getMainLooper()).post {
+            assertStepperLayout()
                 .hasBackButtonHidden()
                 .hasNextButtonHidden()
                 .hasCompleteButtonHidden()
+        }
     }
 
     @Test
@@ -357,18 +373,21 @@ class StepperLayoutTest {
         //given
         val attributeSet = createAttributeSetWithStepperType(TYPE_TABS)
         val lastStepViewModel = StepViewModel.Builder(RuntimeEnvironment.application)
-                .setEndButtonVisible(false)
-                .create()
-        stepperLayout = createStepperLayoutWithAdapterSetInActivity(attributeSet, null, null, lastStepViewModel)
+            .setEndButtonVisible(false)
+            .create()
+        stepperLayout =
+            createStepperLayoutWithAdapterSetInActivity(attributeSet, null, null, lastStepViewModel)
 
         //when
         goToLastPage()
 
         //then
-        assertStepperLayout()
+        Handler(Looper.getMainLooper()).post {
+            assertStepperLayout()
                 .hasBackButtonShown()
                 .hasNextButtonHidden()
                 .hasCompleteButtonHidden()
+        }
     }
 
     private fun goToLastPage() {
@@ -383,10 +402,10 @@ class StepperLayoutTest {
         return StepperLayoutAssert.assertThat(stepperLayout)
     }
 
-    fun assertFirstFragmentWasNotifiedAboutBeingSelected() {
+    private fun assertFirstFragmentWasNotifiedAboutBeingSelected() {
         val stepAdapter = stepperLayout.adapter as SpyStepAdapter
         val firstStep = stepAdapter.steps.get(0)
-        Assert.assertNotNull("Step not found", firstStep)
+        assertNotNull(firstStep)
         Mockito.verify(firstStep).onSelected()
     }
 

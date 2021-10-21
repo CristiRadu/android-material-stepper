@@ -1,35 +1,36 @@
 package com.stepstone.stepper.internal.widget.pagetransformer;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
-import android.support.v4.view.ViewPager;
+import android.content.res.Resources;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.stepstone.stepper.R;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * Creates a page transformer to be used by {@link com.stepstone.stepper.internal.widget.StepViewPager}.
  *
  * @author Piotr Zawadzki
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class StepPageTransformerFactory {
 
     private StepPageTransformerFactory() {
     }
 
     /**
-     * Creates a {@link android.support.v4.view.ViewPager.PageTransformer}.
+     * Creates a {@link ViewPager.PageTransformer}.
      * If layout direction is in RTL it returns {@link StepperRtlPageTransformer}, <i>null</i> otherwise.
-     * @param context context
+     *
+     * @param Resources resources
      * @return page transformer
      */
     @Nullable
-    public static ViewPager.PageTransformer createPageTransformer(@NonNull Context context) {
-        boolean rtlEnabled = context.getResources().getBoolean(R.bool.ms_rtlEnabled);
+    public static ViewPager2.PageTransformer createPageTransformer(@NonNull Resources resources) {
+        boolean rtlEnabled = resources.getBoolean(R.bool.ms_rtlEnabled);
         return rtlEnabled ? new StepperRtlPageTransformer() : null;
     }
 

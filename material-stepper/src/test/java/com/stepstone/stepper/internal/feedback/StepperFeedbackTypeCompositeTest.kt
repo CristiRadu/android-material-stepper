@@ -1,8 +1,8 @@
 package com.stepstone.stepper.internal.feedback
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.stepstone.stepper.test.assertion.StepperFeedbackTypeCompositeAssert.Companion.assertThat
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import test.assertion.StepperFeedbackTypeCompositeAssert.Companion.assertThat
 import org.junit.Test
 
 /**

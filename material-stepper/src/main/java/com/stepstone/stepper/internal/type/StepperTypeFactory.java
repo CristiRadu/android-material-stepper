@@ -16,24 +16,24 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.type;
 
-import android.support.annotation.RestrictTo;
 import android.util.Log;
 
-import com.stepstone.stepper.StepperLayout;
+import androidx.annotation.RestrictTo;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import com.stepstone.stepper.StepperLayout;
 
 /**
  * Factory class for creating stepper types.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class StepperTypeFactory {
 
     private static final String TAG = StepperTypeFactory.class.getSimpleName();
 
     /**
      * Creates a stepper type for provided arguments.
-     * @param stepType step type, one of <code>attrs - ms_stepperType</code>
+     *
+     * @param stepType      step type, one of <code>attrs - ms_stepperType</code>
      * @param stepperLayout stepper layout to use with this stepper type
      * @return a stepper type
      */

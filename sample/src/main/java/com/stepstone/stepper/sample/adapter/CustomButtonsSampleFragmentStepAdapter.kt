@@ -1,9 +1,8 @@
 package com.stepstone.stepper.sample.adapter
 
 import android.content.Context
-import android.support.annotation.IntRange
-import android.support.v4.app.FragmentManager
-
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter
 import com.stepstone.stepper.sample.R
@@ -11,7 +10,11 @@ import com.stepstone.stepper.sample.step.fragment.FormStepFragment
 import com.stepstone.stepper.sample.step.fragment.StepFragmentSample
 import com.stepstone.stepper.viewmodel.StepViewModel
 
-class CustomButtonsSampleFragmentStepAdapter(fm: FragmentManager, context: Context) : AbstractFragmentStepAdapter(fm, context) {
+class CustomButtonsSampleFragmentStepAdapter(
+    fm: FragmentManager,
+    lifecycle: Lifecycle,
+    context: Context
+) : AbstractFragmentStepAdapter(fm, lifecycle, context) {
 
     override fun createStep(position: Int): Step {
         when (position) {
@@ -27,29 +30,29 @@ class CustomButtonsSampleFragmentStepAdapter(fm: FragmentManager, context: Conte
         return 4
     }
 
-    override fun getViewModel(@IntRange(from = 0) position: Int): StepViewModel {
+    override fun getViewModel(position: Int): StepViewModel {
         val builder = StepViewModel.Builder(context)
-                .setTitle(R.string.tab_title)
+            .setTitle(R.string.tab_title)
         when (position) {
             0 -> builder
-                    .setEndButtonLabel("This way")
-                    .setBackButtonLabel("Cancel")
-                    .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
-                    .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE)
+                .setEndButtonLabel("This way")
+                .setBackButtonLabel("Cancel")
+                .setNextButtonEndDrawableResId(R.drawable.ms_forward_arrow)
+                .setBackButtonStartDrawableResId(StepViewModel.NULL_DRAWABLE)
             1 -> builder
-                    .setEndButtonLabel(R.string.go_to_summary)
-                    .setBackButtonLabel("Go to first")
-                    .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow)
+                .setEndButtonLabel(R.string.go_to_summary)
+                .setBackButtonLabel("Go to first")
+                .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow)
             2 -> builder
-                    .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow)
-                    .setEndButtonLabel(R.string.go_to_summary)
-                    .setBackButtonLabel("")
-                    .setEndButtonLabel("")
-                    .setBackButtonVisible(false)
-                    .setEndButtonVisible(false)
+                .setBackButtonStartDrawableResId(R.drawable.ms_back_arrow)
+                .setEndButtonLabel(R.string.go_to_summary)
+                .setBackButtonLabel("")
+                .setEndButtonLabel("")
+                .setBackButtonVisible(false)
+                .setEndButtonVisible(false)
             3 -> builder
-                    .setBackButtonLabel("Go back")
-                    .setEndButtonLabel("I'm done!")
+                .setBackButtonLabel("Go back")
+                .setEndButtonLabel("I'm done!")
             else -> throw IllegalArgumentException("Unsupported position: " + position)
         }
         return builder.create()

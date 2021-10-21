@@ -18,24 +18,22 @@ package com.stepstone.stepper.internal.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.RestrictTo;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.RestrictTo;
+import androidx.core.content.ContextCompat;
+
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.internal.util.TintUtil;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * An indicator displaying the current position in a list of items with dots.
  */
-@RestrictTo(LIBRARY)
 public class DottedProgressBar extends LinearLayout {
 
     private static final float FULL_SCALE = 1f;
@@ -89,7 +87,8 @@ public class DottedProgressBar extends LinearLayout {
 
     /**
      * Changes the currently selected dot and updates the UI accordingly
-     * @param current the new currently selected dot
+     *
+     * @param current       the new currently selected dot
      * @param shouldAnimate true if the change should be animated, false otherwise
      */
     public void setCurrent(int current, boolean shouldAnimate) {

@@ -1,1 +1,3 @@
-include ':sample', ':material-stepper', ':espresso-material-stepper'
+include ':sample'
+include ':material-stepper'
+include ':espresso-material-stepper'

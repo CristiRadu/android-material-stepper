@@ -2,6 +2,12 @@
   <img src ="./art/material-stepper-logo.png" width="256" height="256"/>
 </p>
 
+# Fork of Android Material Stepper with AndroidX dependencies
+
+Fade transition may or may not work (I haven't tested them)
+No artifacts published at this moment, you can create your own with `gradlew publishToMavenLocal` and adding `mavenLocal()` to the project you want to import it to in the list of repositories. If people find it useful, I'll try to publish it to `mavenCentral()`
+Import with `com.stepstone.stepper:material-stepper:5.0.0`
+
 # Android Material Stepper [![CircleCI](https://circleci.com/gh/stepstone-tech/android-material-stepper.svg?style=svg)](https://circleci.com/gh/stepstone-tech/android-material-stepper) [![codecov](https://codecov.io/gh/stepstone-tech/android-material-stepper/branch/master/graph/badge.svg)](https://codecov.io/gh/stepstone-tech/android-material-stepper) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20Stepper-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5138) [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23243-brightgreen.svg)](http://androidweekly.net/issues/issue-243)
 
 This library allows to use Material steppers inside Android applications.
@@ -87,7 +93,7 @@ which is the minimum Android Support library version compatible with the Stepper
 For a complete list of StepperLayout attributes see [StepperLayout attributes](#StepperLayout attributes).
 
 ### Create step Fragment(s)
-Step fragments must extend [android.support.v4.app.Fragment](http://developer.android.com/reference/android/support/v4/app/Fragment.html)
+Step fragments must extend [androidx.fragment.app.Fragment](http://developer.android.com/reference/android/support/v4/app/Fragment.html)
 and implement `com.stepstone.stepper.Step`
 
 ```java

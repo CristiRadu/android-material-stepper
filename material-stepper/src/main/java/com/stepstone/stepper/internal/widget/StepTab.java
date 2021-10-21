@@ -22,14 +22,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.CallSuper;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.VisibleForTesting;
-import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
@@ -40,17 +32,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 import com.stepstone.stepper.internal.util.ObjectsCompat;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-
 /**
  * A widget for a single tab in the {@link TabsContainer}.
  */
-@RestrictTo(LIBRARY)
 public class StepTab extends RelativeLayout {
 
     private static final float ALPHA_TRANSPARENT = 0.0f;
@@ -157,9 +155,10 @@ public class StepTab extends RelativeLayout {
 
     /**
      * Updates the UI state of the tab and sets {@link #mCurrentState} based on the arguments.
-     *  @param error   not null if an error/warning should be shown, null if not an error
-     * @param done    true the step was completed, if warning is not shown and this is <code>true</code> a done indicator will be shown
-     * @param current true if this is the currently selected step
+     *
+     * @param error                   not null if an error/warning should be shown, null if not an error
+     * @param done                    true the step was completed, if warning is not shown and this is <code>true</code> a done indicator will be shown
+     * @param current                 true if this is the currently selected step
      * @param showErrorMessageEnabled true if an error message below step title should appear when an error occurs
      */
     public void updateState(@Nullable final VerificationError error, final boolean done, final boolean current, boolean showErrorMessageEnabled) {

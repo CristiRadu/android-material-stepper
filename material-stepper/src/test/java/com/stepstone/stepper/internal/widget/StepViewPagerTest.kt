@@ -1,10 +1,13 @@
 package com.stepstone.stepper.internal.widget
 
 import android.view.MotionEvent
-import com.nhaarman.mockito_kotlin.mock
-import com.stepstone.stepper.test.runner.StepperRobolectricTestRunner
+import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import org.mockito.kotlin.mock
+import test.runner.StepperRobolectricTestRunner
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RuntimeEnvironment
@@ -15,14 +18,16 @@ import org.robolectric.RuntimeEnvironment
 @RunWith(StepperRobolectricTestRunner::class)
 class StepViewPagerTest {
 
-    val mockTouchEvent: MotionEvent = mock { }
+    private val mockTouchEvent: MotionEvent = mock()
 
-    val stepPager: StepViewPager = StepViewPager(RuntimeEnvironment.application)
+    private val stepPager: ViewPager2 = ViewPager2(RuntimeEnvironment.application)
 
     @Test
+    @Ignore("ViewPager2 isUserInputEnabled already covers this case")
     fun `Should steal motion events from children if blocking children is enabled`() {
         //given
-        stepPager.setBlockTouchEventsFromChildrenEnabled(true)
+        stepPager.isUserInputEnabled = false
+        stepPager.descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
 
         //when
         val shouldStealMotionEventFromChildren = stepPager.onInterceptTouchEvent(mockTouchEvent)

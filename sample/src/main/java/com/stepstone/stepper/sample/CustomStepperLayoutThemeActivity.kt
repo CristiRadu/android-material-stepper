@@ -18,15 +18,13 @@ package com.stepstone.stepper.sample
 
 import android.content.Context
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-
 class CustomStepperLayoutThemeActivity : AbstractStepperActivity() {
 
     override val layoutResId: Int
         get() = R.layout.activity_custom_stepper_layout_theme
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
 }

@@ -17,7 +17,7 @@ limitations under the License.
 package com.stepstone.stepper.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 import com.stepstone.stepper.StepperLayout
 import com.stepstone.stepper.sample.adapter.DelayedTransitionFragmentStepAdapter
@@ -42,7 +42,7 @@ class DelayedTransitionStepperActivity : AppCompatActivity() {
         setContentView(R.layout.activity_delayed_transition)
         ButterKnife.bind(this)
         val startingStepPosition = savedInstanceState?.getInt(CURRENT_STEP_POSITION_KEY) ?: 0
-        stepperLayout.setAdapter(DelayedTransitionFragmentStepAdapter(supportFragmentManager, this), startingStepPosition)
+        stepperLayout.setAdapter(DelayedTransitionFragmentStepAdapter(supportFragmentManager, lifecycle, this), startingStepPosition)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

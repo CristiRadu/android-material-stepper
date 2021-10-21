@@ -2,9 +2,9 @@ package com.stepstone.stepper.internal.feedback
 
 import android.view.View
 import android.widget.ProgressBar
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import com.stepstone.stepper.R
 import com.stepstone.stepper.StepperLayout
 import org.junit.Test

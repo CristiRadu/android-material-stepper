@@ -1,9 +1,12 @@
 package com.stepstone.stepper.adapter;
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
@@ -13,26 +16,35 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
  * Otherwise, you should use {@link AbstractFragmentStepAdapter}
  */
 public abstract class AbstractStepAdapter
-        extends PagerAdapter
+        extends FragmentStateAdapter
         implements StepAdapter {
 
     @NonNull
     protected final Context context;
 
-    public AbstractStepAdapter(@NonNull Context context) {
+    public AbstractStepAdapter(
+            @NonNull FragmentManager fm,
+            @NonNull Lifecycle lifecycle,
+            @NonNull Context context
+    ) {
+        super(fm, lifecycle);
         this.context = context;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
         return new StepViewModel.Builder(context).create();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final PagerAdapter getPagerAdapter() {
+    public final FragmentStateAdapter getPagerAdapter() {
         return this;
     }
 }

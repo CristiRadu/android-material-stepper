@@ -1,8 +1,8 @@
 package com.stepstone.stepper.internal.widget.pagetransformer
 
 import android.view.View
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.junit.Test
 import org.mockito.AdditionalMatchers.or
 import org.mockito.ArgumentMatchers.eq

@@ -18,11 +18,11 @@ package com.stepstone.stepper.sample.step.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.text.Html
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import androidx.annotation.LayoutRes
 import butterknife.BindView
 import com.stepstone.stepper.Step
 import com.stepstone.stepper.VerificationError
@@ -55,7 +55,7 @@ internal class StepFragmentSample : ButterKnifeFragment(), Step {
 
     private var onNavigationBarListener: OnNavigationBarListener? = null
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnNavigationBarListener) {
             onNavigationBarListener = context
@@ -79,7 +79,7 @@ internal class StepFragmentSample : ButterKnifeFragment(), Step {
     }
 
     override val layoutResId: Int
-        get() = arguments!!.getInt(LAYOUT_RESOURCE_ID_ARG_KEY)
+        get() = requireArguments().getInt(LAYOUT_RESOURCE_ID_ARG_KEY)
 
     override fun verifyStep(): VerificationError? {
         return if (isAboveThreshold) null else VerificationError("Click ${TAP_THRESHOLD - i} more times!")

@@ -1,7 +1,7 @@
 package com.stepstone.stepper.internal.feedback
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import com.stepstone.stepper.StepperLayout
 import org.junit.Test
 

@@ -16,24 +16,24 @@ limitations under the License.
 
 package com.stepstone.stepper.internal.feedback;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_INVISIBLE;
+import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
+
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
+
 import com.stepstone.stepper.R;
 import com.stepstone.stepper.StepperLayout;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
-import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_INVISIBLE;
-import static com.stepstone.stepper.internal.util.AnimationUtil.ALPHA_OPAQUE;
 
 /**
  * Feedback stepper type which displays a progress message instead of the tabs.
  */
-@RestrictTo(LIBRARY)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class TabsStepperFeedbackType implements StepperFeedbackType {
 
     private final float mProgressMessageTranslationWhenHidden;
